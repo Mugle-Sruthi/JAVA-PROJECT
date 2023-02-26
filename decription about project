@@ -1,0 +1,102 @@
+//Importing the Scanner class:
+
+import java.util.Scanner;
+
+//Defining the CaesarCipher class:
+
+public class CaesarCipher {
+
+//Defining the main method, which is the entry point of the program
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+This method first creates an instance of the Scanner class to read user input from the command line
+
+//Prompting the user to enter the plain text:
+        System.out.print("Enter the plain text: ");
+        String plainText = input.nextLine();
+This line prints the message "Enter the plain text: " on the console and waits for the user to enter a string. The string entered by the user is stored in the plainText variable
+
+//Prompting the user to enter the shift value
+        System.out.print("Enter the shift: ");
+        int shift = input.nextInt();
+This line prints the message "Enter the shift: " on the console and waits for the user to enter an integer. The integer entered by the user is stored in the shift variable
+
+//Calling the encrypt method to encrypt the plain text
+        String cipherText = encrypt(plainText, shift);
+This line calls the encrypt method and passes the plainText and shift variables as arguments. The resulting encrypted string is stored in the cipherText variable
+
+//Printing the encrypted text
+        System.out.println("Cipher text: " + cipherText);
+This line prints the encrypted text on the console.
+
+//Calling the decrypt method to decrypt the cipher text
+        String decryptedText = decrypt(cipherText, shift);
+
+This line calls the decrypt method and passes the cipherText and shift variables as arguments. The resulting decrypted string is stored in the decryptedText variable
+
+
+//Printing the decrypted text
+        System.out.println("Decrypted text: " + decryptedText);
+This line prints the decrypted text on the console
+
+//Closing the Scanner instance
+        input.close();
+    }
+This line closes the Scanner instance to prevent resource leakage
+
+
+//Defining the encrypt method:
+    public static String encrypt(String plainText, int shift) {
+        String cipherText = "";
+        for (int i = 0; i < plainText.length(); i++) {
+            char ch = plainText.charAt(i);
+            if (ch >= 'a' && ch <= 'z') {
+                ch = (char) (ch + shift);
+                if (ch > 'z') {
+                    ch = (char) (ch - 'z' + 'a' - 1);
+                }
+                cipherText += ch;
+            } else if (ch >= 'A' && ch <= 'Z') {
+                ch = (char) (ch + shift);
+                if (ch > 'Z') {
+                    ch = (char) (ch - 'Z' + 'A' - 1);
+                }
+                cipherText += ch;
+            } else {
+                cipherText += ch;
+            }
+        }
+        return cipherText;
+    }
+This method takes in two arguments, the plainText string and the shift integer. It encrypts the plainText string using the Caesar Cipher algorithm and returns the resulting cipherText string.
+
+//same the code is for decrypt mean while and the logic is same for the decrypt 
+public static String decrypt(String cipherText, int shift) {
+        String plainText = "";
+        for (int i = 0; i < cipherText.length(); i++) {
+            char ch = cipherText.charAt(i);
+            if (ch >= 'a' && ch <= 'z') {
+                ch = (char) (ch - shift);
+                if (ch < 'a') {
+                    ch = (char) (ch + 'z' - 'a' + 1);
+                }
+                plainText += ch;
+            } else if (ch >= 'A' && ch <= 'Z') {
+                ch = (char) (ch - shift);
+                if (ch < 'A') {
+                    ch = (char) (ch + 'Z' - 'A' + 1);
+                }
+                plainText += ch;
+            } else {
+                plainText += ch;
+            }
+        }
+        return plainText;
+    }
+}
+
+
+In this the part of code the encrypt code is decrypted to the plain text
+as original
+ we can use both right and left shift 
+ 
